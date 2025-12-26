@@ -20,7 +20,7 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog";
 import { LogOut, User, Key, CheckCircle2, Loader2, Scale } from 'lucide-react';
-import { io, Socket } from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { api } from '../lib/api';
 import axios from 'axios';
 import { toast } from "sonner";
@@ -39,7 +39,6 @@ export default function DashboardPage() {
 
     // State'ler
     const [weights, setWeights] = useState<WeightItem[]>([]);
-    const [socket, setSocket] = useState<Socket | null>(null);
 
     // Modal ve İşlem State'leri
     const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -73,8 +72,6 @@ export default function DashboardPage() {
 
             setWeights((prev) => [newItem, ...prev]);
         });
-
-        setSocket(socketInstance);
 
         return () => {
             socketInstance.disconnect();
